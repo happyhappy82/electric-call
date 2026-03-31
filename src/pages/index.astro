@@ -10,6 +10,8 @@ import ContactForm from '../components/ContactForm.astro';
 >
 
   <section class="main-hero">
+    <img src="/hero.png" alt="전기공사 전문가가 분전반을 점검하는 모습" class="hero-bg" />
+    <div class="hero-overlay"></div>
     <div class="main-hero-inner">
       <p class="main-badge">전기공사 전문</p>
       <h1>전기 문제,<br/>전문가에게 바로 연결하세요</h1>
@@ -65,12 +67,31 @@ import ContactForm from '../components/ContactForm.astro';
 
 <style>
   .main-hero {
-    background: linear-gradient(135deg, #1e3a5f 0%, #0f2439 100%);
+    position: relative;
     color: #fff;
-    padding: 120px 24px 100px;
+    padding: 140px 24px 120px;
     text-align: center;
+    overflow: hidden;
   }
-  .main-hero-inner { max-width: 640px; margin: 0 auto; }
+  .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 36, 57, 0.75);
+    z-index: 1;
+  }
+  .main-hero-inner { max-width: 640px; margin: 0 auto; position: relative; z-index: 2; }
   .main-badge {
     display: inline-block;
     background: rgba(255,255,255,0.15);
