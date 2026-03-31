@@ -1,0 +1,123 @@
+---
+import StickyBar from '../components/StickyBar.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  keyword: string;
+}
+const { title, description, keyword } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} | 전기공사콜</title>
+  <meta name="description" content={description} />
+  <meta name="keywords" content={keyword} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="article" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">전기공사콜</span>
+      </a>
+      <nav class="header-nav">
+        <a href="/blog" class="header-link">가이드</a>
+        <a href="#contact" class="header-cta">
+          <span class="header-cta-text">무료 상담</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main>
+    <slot />
+  </main>
+
+  <!-- 하단 고정 견적 바 -->
+  <StickyBar />
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p class="footer-brand">⚡ 전기공사콜</p>
+      <p class="footer-desc">전기공사 전문 상담 · 전국 네트워크</p>
+      <p class="footer-copy">© 2026 전기공사콜. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .header-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 1.125rem;
+  }
+  .logo-icon { font-size: 1.25rem; }
+  .header-cta {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .header-link {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    transition: color 0.2s;
+  }
+  .header-link:hover { color: var(--color-text); }
+  .header-cta:hover { background: var(--color-primary-hover); }
+
+  .footer {
+    background: var(--color-bg-dark);
+    color: #fff;
+    padding: 48px 24px;
+    text-align: center;
+  }
+  .footer-inner { max-width: var(--max-width); margin: 0 auto; }
+  .footer-brand { font-size: 1.125rem; font-weight: 700; margin-bottom: 8px; }
+  .footer-desc { font-size: 0.875rem; color: var(--color-text-tertiary); margin-bottom: 16px; }
+  .footer-copy { font-size: 0.75rem; color: var(--color-text-tertiary); }
+</style>

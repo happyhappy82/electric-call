@@ -1,0 +1,138 @@
+---
+import BlogPost from '../layouts/BlogPost.astro';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<BlogPost
+  title="전기공사콜 — 전기공사 전문 상담"
+  description="전기공사, 전기수리, 누전/합선 수리까지. 정식 면허 업체에게 무료 상담 받으세요."
+  keyword="전기공사, 전기수리, 누전수리, 합선수리, 전기공사 견적"
+>
+
+  <section class="main-hero">
+    <div class="main-hero-inner">
+      <p class="main-badge">전기공사 전문</p>
+      <h1>전기 문제,<br/>전문가에게 바로 연결하세요</h1>
+      <p class="main-desc">
+        누전, 합선, 분전반 교체, 전기 증설까지<br/>
+        정식 면허 업체가 빠르게 해결합니다
+      </p>
+      <a href="#contact" class="main-cta">무료 상담 받기</a>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="services-inner">
+      <h2 class="services-title">이런 상황이라면 연락주세요</h2>
+      <div class="services-grid">
+        <a href="/blog/hapsen-suri-biyong" class="service-card">
+          <div class="service-icon">⚡</div>
+          <h3>합선/누전 수리</h3>
+          <p>차단기가 내려가거나 타는 냄새가 나면</p>
+        </a>
+        <div class="service-card">
+          <div class="service-icon">🔌</div>
+          <h3>콘센트 증설/교체</h3>
+          <p>콘센트가 부족하거나 교체가 필요할 때</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🏢</div>
+          <h3>상가/사무실 전기공사</h3>
+          <p>인테리어, 이전, 신규 입주 시 전기 세팅</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📊</div>
+          <h3>분전반 교체</h3>
+          <p>오래된 분전반 교체 및 증설</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💡</div>
+          <h3>조명 설치/교체</h3>
+          <p>LED 교체, 조명 신규 설치</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔧</div>
+          <h3>긴급 출장 수리</h3>
+          <p>야간/휴일 긴급 전기 수리</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ContactForm />
+
+</BlogPost>
+
+<style>
+  .main-hero {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f2439 100%);
+    color: #fff;
+    padding: 120px 24px 100px;
+    text-align: center;
+  }
+  .main-hero-inner { max-width: 640px; margin: 0 auto; }
+  .main-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .main-hero h1 { color: #fff; margin-bottom: 20px; }
+  .main-desc {
+    color: rgba(255,255,255,0.75);
+    font-size: 1.0625rem;
+    margin-bottom: 36px;
+  }
+  .main-cta {
+    display: inline-block;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 16px 40px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 1.0625rem;
+    transition: background 0.2s;
+  }
+  .main-cta:hover { background: var(--color-primary-hover); }
+
+  .services { padding: 80px 24px; }
+  .services-inner { max-width: 960px; margin: 0 auto; }
+  .services-title {
+    text-align: center;
+    margin-bottom: 48px;
+    color: var(--color-text);
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .service-card {
+    background: var(--color-bg-secondary);
+    padding: 32px 24px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    text-align: center;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .service-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .service-icon { font-size: 2rem; margin-bottom: 16px; }
+  .service-card h3 { margin-bottom: 8px; color: var(--color-text); }
+  .service-card p { font-size: 0.875rem; }
+
+  @media (max-width: 768px) {
+    .main-hero { padding: 80px 20px 60px; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+</style>

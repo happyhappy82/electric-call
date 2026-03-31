@@ -1,0 +1,200 @@
+---
+import { getCollection } from 'astro:content';
+import { render } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
+import ContactForm from '../../components/ContactForm.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, description, keyword, service } = post.data;
+---
+
+<BlogPost title={title} description={description} keyword={keyword}>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-badge">{service}</p>
+      <h1>{title}</h1>
+      <p class="hero-desc">{description}</p>
+      <a href="#contact" class="hero-cta">무료 상담 받기</a>
+    </div>
+  </section>
+
+  <!-- Article (Markdown rendered) -->
+  <article class="article">
+    <div class="article-inner prose">
+      <Content />
+    </div>
+  </article>
+
+  <!-- CTA Banner -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2>전문가의 정확한 진단이 필요합니다</h2>
+      <p>지금 바로 무료 상담 받아보세요.</p>
+      <a href="#contact" class="cta-btn">무료 상담 신청하기</a>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <ContactForm service={service} />
+
+</BlogPost>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f2439 100%);
+    color: #fff;
+    padding: 100px 24px 80px;
+    text-align: center;
+  }
+  .hero-inner { max-width: 720px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .hero h1 { color: #fff; margin-bottom: 20px; font-size: 2rem; }
+  .hero-desc {
+    color: rgba(255,255,255,0.75);
+    font-size: 1.0625rem;
+    margin-bottom: 32px;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: #3182f6;
+    color: #fff;
+    padding: 14px 36px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: background 0.2s;
+  }
+  .hero-cta:hover { background: #1b64da; }
+
+  .article { padding: 80px 24px; }
+  .article-inner { max-width: 720px; margin: 0 auto; }
+
+  /* Prose — Markdown 렌더링 스타일 */
+  .prose :global(h2) {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #191f28;
+    margin: 48px 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e5e8eb;
+    letter-spacing: -0.02em;
+  }
+  .prose :global(h3) {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #191f28;
+    margin: 32px 0 12px;
+  }
+  .prose :global(p) {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #6b7684;
+    margin-bottom: 16px;
+  }
+  .prose :global(strong) {
+    color: #191f28;
+    font-weight: 600;
+  }
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e5e8eb;
+  }
+  .prose :global(thead) {
+    background: #191f28;
+    color: #fff;
+  }
+  .prose :global(th) {
+    padding: 14px 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-align: left;
+  }
+  .prose :global(td) {
+    padding: 14px 20px;
+    font-size: 0.9375rem;
+    border-bottom: 1px solid #e5e8eb;
+    color: #191f28;
+  }
+  .prose :global(tr:last-child td) {
+    border-bottom: none;
+  }
+  .prose :global(tr:nth-child(even)) {
+    background: #f7f8fa;
+  }
+  .prose :global(blockquote) {
+    background: #e8f3ff;
+    border-left: 4px solid #3182f6;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 24px 0;
+  }
+  .prose :global(blockquote p) {
+    color: #191f28;
+    font-size: 0.875rem;
+    margin: 0;
+  }
+  .prose :global(ul), .prose :global(ol) {
+    padding-left: 24px;
+    margin-bottom: 16px;
+  }
+  .prose :global(li) {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #6b7684;
+    margin-bottom: 8px;
+  }
+
+  .cta-section {
+    padding: 0 24px 80px;
+  }
+  .cta-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f2439 100%);
+    color: #fff;
+    padding: 48px 32px;
+    border-radius: 16px;
+    text-align: center;
+  }
+  .cta-inner h2 { color: #fff; margin-bottom: 12px; font-size: 1.5rem; }
+  .cta-inner p { color: rgba(255,255,255,0.75); margin-bottom: 24px; }
+  .cta-btn {
+    display: inline-block;
+    background: #3182f6;
+    color: #fff;
+    padding: 14px 36px;
+    border-radius: 100px;
+    font-weight: 700;
+    transition: background 0.2s;
+  }
+  .cta-btn:hover { background: #1b64da; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 80px 20px 60px; }
+    .hero h1 { font-size: 1.625rem; }
+  }
+</style>

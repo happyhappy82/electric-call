@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
+
+const posts = await getCollection('blog');
+---
+
+<BlogPost
+  title="전기공사 가이드"
+  description="전기공사 비용, 수리 방법, 업체 선택 기준까지. 전기 관련 모든 정보를 한곳에서."
+  keyword="전기공사, 전기수리, 전기공사 비용, 전기공사 가이드"
+>
+
+  <section class="blog-hero">
+    <div class="blog-hero-inner">
+      <h1>전기공사 가이드</h1>
+      <p>비용, 수리 방법, 업체 선택까지 한 번에 확인하세요</p>
+    </div>
+  </section>
+
+  <section class="blog-list">
+    <div class="blog-list-inner">
+      {posts.map((post) => (
+        <a href={`/blog/${post.id}/`} class="blog-card">
+          <div class="blog-card-badge">{post.data.service}</div>
+          <h2>{post.data.title}</h2>
+          <p>{post.data.description}</p>
+          <span class="blog-card-link">자세히 보기 →</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+</BlogPost>
+
+<style>
+  .blog-hero {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f2439 100%);
+    color: #fff;
+    padding: 80px 24px 60px;
+    text-align: center;
+  }
+  .blog-hero-inner { max-width: 720px; margin: 0 auto; }
+  .blog-hero h1 { color: #fff; margin-bottom: 12px; }
+  .blog-hero p { color: rgba(255,255,255,0.7); font-size: 1.0625rem; }
+
+  .blog-list { padding: 60px 24px 80px; }
+  .blog-list-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .blog-card {
+    display: block;
+    background: #fff;
+    border: 1px solid #e5e8eb;
+    border-radius: 12px;
+    padding: 28px 24px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .blog-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  .blog-card-badge {
+    display: inline-block;
+    background: #e8f3ff;
+    color: #3182f6;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+  }
+  .blog-card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+    color: #191f28;
+  }
+  .blog-card p {
+    font-size: 0.9375rem;
+    color: #6b7684;
+    margin-bottom: 12px;
+  }
+  .blog-card-link {
+    font-size: 0.875rem;
+    color: #3182f6;
+    font-weight: 600;
+  }
+</style>
